@@ -13,16 +13,16 @@ class Common {
     );
   }
 
-  static iconImage({path: String}) {
+  static iconImage({path: String, color = const Color(0xFF262d50)}) {
     return Image.asset(
       "images/$path",
       width: 24,
       height: 24,
-      color: Colors.blue,
+      color: color,
     );
   }
 
-  static circleAvatar({size = 64.0,  path: String}) {
+  static circleAvatar({size = 64.0, path: String}) {
     return CircleAvatar(
       radius: size / 2,
       backgroundImage: Image.asset(
@@ -33,32 +33,38 @@ class Common {
     );
   }
 
-  static primaryContent({content: String}) {
+  static primaryContent({content: String, color = const Color(0xFF6b7399)}) {
     return Text(
       content,
-      style: TextStyle(color: Color(0xFF6b7399), fontSize: 16),
+      style: TextStyle(color: color, fontSize: 16),
     );
   }
 
-  static primaryTitle({content: String}) {
+  static primarySmallTitle({content: String, color = const Color(0xFF262d50)}) {
     return Text(
       content,
-      style: TextStyle(color: Color(0xFF262d50), fontSize: 16),
+      style: TextStyle(color: color, fontSize: 14),
     );
   }
 
-  static primaryBigTitle({content: String}) {
+  static primaryTitle({content: String, color = const Color(0xFF262d50)}) {
     return Text(
       content,
-      style: TextStyle(color: Color(0xFF262d50), fontSize: 18),
+      style: TextStyle(color: color, fontSize: 16),
     );
   }
 
-  static primarySubTitle({content: String}) {
+  static primaryBigTitle({content: String, color = const Color(0xFF262d50)}) {
     return Text(
       content,
-      style: TextStyle(color: Color(0xFF8F95B3), fontSize: 14),
+      style: TextStyle(color: color, fontSize: 18),
     );
   }
 
+  static primarySubTitle({content: String, color = const Color(0xFF8F95B3)}) {
+    return Text(
+      content,
+      style: TextStyle(color: color, fontSize: 14),
+    );
+  }
 }

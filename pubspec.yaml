@@ -46,6 +46,15 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - images/ic_splash_robot.webp
+    - images/ic_default_avatar.webp
+    - images/ic_menu_home.png
+    - images/ic_menu_life.webp
+    - images/ic_menu_spend.png
+    - images/ic_menu_invest.png
+    - images/ic_menu_safe.png
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
