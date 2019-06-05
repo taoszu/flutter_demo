@@ -4,7 +4,7 @@ import '../common_widget.dart';
 import 'custom_alert_dialog.dart';
 
 class RadioAlertDialog extends StatelessWidget {
-  RadioAlertDialog({Key key, @required this.title, @required this.selectValue, this.showCancel = true, this.showConfirm = true, @required this.valueList}) : super(key: key);
+  RadioAlertDialog({Key key, @required this.title, @required this.selectValue, this.showCancel = false, this.showConfirm = true, @required this.valueList}) : super(key: key);
 
   final bool showCancel;
   final bool showConfirm;

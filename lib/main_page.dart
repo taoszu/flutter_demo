@@ -6,18 +6,17 @@ import 'common_widget.dart';
 import 'home/home_page.dart';
 import 'life/life_page.dart';
 
-
 class DrawerItem {
   String title;
   String iconPath;
   Color highlightColor;
   Color contentHighlightColor;
+
   DrawerItem(this.title, this.iconPath, this.highlightColor, this.contentHighlightColor);
 }
 
 class MainPage extends StatefulWidget {
-
-  MainPage({Key key, this.pageKey = "home"}):super(key:key);
+  MainPage({Key key, this.pageKey = "home"}) : super(key: key);
 
   final String pageKey;
 
@@ -72,29 +71,30 @@ class _MainState extends State<MainPage> {
 
   _buildDrawer() {
     List<Widget> drawerOptions = [];
-    widget.drawerItems.forEach((String key, DrawerItem item) => drawerOptions.add(
-      DrawerRippleItem(
-        iconPath: item.iconPath,
-        title: item.title,
-        highlightColor: item.highlightColor,
-        contentHighlightColor: item.contentHighlightColor,
-        isSelect: key == _selectedPageKey,
-        tapCallback: () => _onSelectItem(key),
-      )
-    ));
+    widget.drawerItems.forEach((String key, DrawerItem item) => drawerOptions.add(DrawerRippleItem(
+          iconPath: item.iconPath,
+          title: item.title,
+          highlightColor: item.highlightColor,
+          contentHighlightColor: item.contentHighlightColor,
+          isSelect: key == _selectedPageKey,
+          tapCallback: () => _onSelectItem(key),
+        )));
 
     return Drawer(
         child: Container(
             color: Colors.white,
             child: Column(
               children: <Widget>[
-                Container(
-                  height: 100,
-                  margin: EdgeInsets.fromLTRB(16, 32, 0, 0),
-                  child: Center(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[Common.circleAvatar(size: 64.0, path: "ic_default_avatar.webp")],
+                GestureDetector(
+                  onTap: () => Navigator.of(context).pushNamed("设置") ,
+                  child: Container(
+                    height: 100,
+                    margin: EdgeInsets.fromLTRB(16, 32, 0, 0),
+                    child: Center(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[Common.circleAvatar(size: 64.0, path: "ic_default_avatar.webp")],
+                      ),
                     ),
                   ),
                 ),
