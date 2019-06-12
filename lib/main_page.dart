@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/title_base_page.dart';
 import 'package:flutter_demo/widget/drawer_ripple_item.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'common_widget.dart';
 import 'home/home_page.dart';
 import 'life/life_page.dart';
@@ -30,13 +30,22 @@ class MainPage extends StatefulWidget {
   _MainState createState() => _MainState();
 }
 
-class _MainState extends State<MainPage> {
+class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
   String _selectedPageKey = "";
+
+  bool _isDrawerType = true;
+
+  TabController _tabController;
+
+  List tabs = ["首页", "生活", "理财"];
+  List tabKeys = ["home", "life", "invest"];
 
   @override
   void initState() {
     super.initState();
     _selectedPageKey = widget.pageKey;
+
+    _tabController = TabController(length: tabs.length, vsync: this);
   }
 
   TitleBasePage _getDrawerItemWidget(String key) {
@@ -52,16 +61,50 @@ class _MainState extends State<MainPage> {
     }
   }
 
+  _getTabBarPage() {
+    return TabBarView(
+      controller: _tabController,
+      children: tabKeys.map((tabKey) {
+        return Container(
+          child: _getDrawerItemWidget(tabKey),
+        );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final currentPage = _getDrawerItemWidget(_selectedPageKey);
+    if (_isDrawerType) {
+      final currentPage = _getDrawerItemWidget(_selectedPageKey);
+      return Scaffold(
+        appBar: _appBar(title: currentPage.title),
+        extendBody: true,
+        drawer: _buildDrawer(),
+        body: currentPage,
+      );
+    } else {
+      _tabController.animateTo(tabKeys.indexOf(_selectedPageKey));
 
-    return Scaffold(
-      appBar: Common.appBar(title: currentPage.title),
-      extendBody: true,
-      drawer: _buildDrawer(),
-      body: currentPage,
-    );
+      return Scaffold(
+        appBar: _appBar(title: tabs[tabKeys.indexOf(_selectedPageKey)]),
+
+        bottomNavigationBar: TabBar(
+            onTap: (index) {
+              this.setState(() => _selectedPageKey = tabKeys[index]);
+            },
+            controller: _tabController,
+            tabs: tabs.map((tab) => Tab(text: tab)).toList()),
+        body: _getTabBarPage(),
+      );
+    }
+  }
+
+  _appBar({title:String}) {
+    return Common.appBar(title:title, actions: [
+      IconButton(icon: Icon(Icons.compare_arrows), onPressed: (){
+        this.setState(()=> _isDrawerType = !_isDrawerType);
+      })
+    ]);
   }
 
   _onSelectItem(String key) {
@@ -86,7 +129,7 @@ class _MainState extends State<MainPage> {
             child: Column(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed("设置") ,
+                  onTap: () => Navigator.of(context).pushNamed("设置"),
                   child: Container(
                     height: 100,
                     margin: EdgeInsets.fromLTRB(16, 32, 0, 0),

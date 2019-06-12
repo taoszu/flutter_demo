@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Common {
-  static appBar({title: String}) {
+  static appBar({title: String, actions:const <Widget>[]}) {
     return AppBar(
       title: Text(
         title,
         style: TextStyle(color: Color(0xFF262d50)),
       ),
+      actions: actions,
       iconTheme: IconThemeData(color: Color(0xFF262d50)),
       backgroundColor: Colors.white,
       elevation: 0,
