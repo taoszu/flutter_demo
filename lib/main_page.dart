@@ -88,12 +88,14 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
       return Scaffold(
         appBar: _appBar(title: tabs[tabKeys.indexOf(_selectedPageKey)]),
 
-        bottomNavigationBar: TabBar(
+        bottomNavigationBar: SafeArea(child:
+
+        TabBar(
             onTap: (index) {
               this.setState(() => _selectedPageKey = tabKeys[index]);
             },
             controller: _tabController,
-            tabs: tabs.map((tab) => Tab(text: tab)).toList()),
+            tabs: tabs.map((tab) => Tab(text: tab)).toList())),
         body: _getTabBarPage(),
       );
     }
@@ -124,7 +126,7 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
         )));
 
     return Drawer(
-        child: Container(
+        child: SafeArea(child:Container(
             color: Colors.white,
             child: Column(
               children: <Widget>[
@@ -132,7 +134,7 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
                   onTap: () => Navigator.of(context).pushNamed("设置"),
                   child: Container(
                     height: 100,
-                    margin: EdgeInsets.fromLTRB(16, 32, 0, 0),
+                    margin: EdgeInsets.only(left: 16),
                     child: Center(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,6 +145,6 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
                 ),
                 Column(children: drawerOptions)
               ],
-            )));
+            ))));
   }
 }
