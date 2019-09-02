@@ -6,6 +6,7 @@ import 'package:flutter_demo/widget/radio_alert_dialog.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../common_widget.dart';
+import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
 
@@ -13,13 +14,30 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage> with RouteAware{
   final settingsStore = SettingsStore();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     settingsStore.getPrefsData();
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPop() {
+    super.didPop();
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
   }
 
   @override

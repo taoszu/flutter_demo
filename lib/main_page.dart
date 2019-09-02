@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/title_base_page.dart';
 import 'package:flutter_demo/widget/drawer_ripple_item.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'common_widget.dart';
 import 'home/home_page.dart';
 import 'life/life_page.dart';
@@ -131,7 +130,7 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
             child: Column(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed("设置"),
+                  onTap: () => Navigator.of(context).pushNamed("设置a"),
                   child: Container(
                     height: 100,
                     margin: EdgeInsets.only(left: 16),

@@ -5,7 +5,12 @@ part 'settings_store.g.dart';
 
 class SettingsStore = _SettingsStore with _$SettingsStore;
 
-abstract class _SettingsStore implements Store {
+abstract class _SettingsStore with Store {
+
+  @override
+  void dispose() {
+  }
+
   var key = {
     "showPage":"showPage",
   };

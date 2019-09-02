@@ -13,15 +13,17 @@ mixin _$SettingsStore on _SettingsStore, Store {
 
   @override
   String get showPage {
+    _$showPageAtom.context.enforceReadPolicy(_$showPageAtom);
     _$showPageAtom.reportObserved();
     return super.showPage;
   }
 
   @override
   set showPage(String value) {
-    _$showPageAtom.context.checkIfStateModificationsAreAllowed(_$showPageAtom);
-    super.showPage = value;
-    _$showPageAtom.reportChanged();
+    _$showPageAtom.context.conditionallyRunInAction(() {
+      super.showPage = value;
+      _$showPageAtom.reportChanged();
+    }, _$showPageAtom, name: '${_$showPageAtom.name}_set');
   }
 
   final _$getPrefsDataAsyncAction = AsyncAction('getPrefsData');
