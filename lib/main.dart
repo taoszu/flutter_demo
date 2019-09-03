@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         backgroundColor: Colors.white,
       ),
-      home: MainPage(),
+      home:MainPage(),
       navigatorObservers: [
         RouteObserver(),
         MyObserver()
@@ -34,16 +34,12 @@ class MyApp extends StatelessWidget {
   }
 
 
-  _onGenerateRoute(RouteSettings routeSettings) {
-    if(routeSettings.name == "设置") {
-      return MaterialPageRoute(builder: (context)  => SettingsPage());
-    } else {
-      return null;
-    }
+  Route _onGenerateRoute(RouteSettings routeSettings) {
+    return null;
   }
 
-  _onUnknownRoute(RouteSettings routeSettings) {
-    return MaterialPageRoute(builder: (context) => UnKnowRoutePage());
+  Route _onUnknownRoute(RouteSettings routeSettings) {
+    return MaterialPageRoute(settings:routeSettings, builder: (context) => UnKnowRoutePage());
   }
 
 }
@@ -53,16 +49,15 @@ class MyObserver extends NavigatorObserver {
   @override
   void didPush(Route route, Route previousRoute) {
     super.didPush(route, previousRoute);
-    print("push current route: " + route.settings.name);
-
-    print("push pervious route: " + previousRoute.settings.name);
+    print("push current route: " + route.settings?.name);
+    print("push pervious route: " + previousRoute.settings?.name);
   }
 
   @override
   void didPop(Route route, Route previousRoute) {
     super.didPop(route, previousRoute);
-    print("pop current  route: " + route.settings.name);
-    print("pop pervious route: " + previousRoute.settings.name);
+    print("pop current  route: " + route.settings?.name);
+    print("pop pervious route: " + previousRoute.settings?.name);
   }
 
 }

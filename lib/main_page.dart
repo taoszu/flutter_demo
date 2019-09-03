@@ -130,7 +130,7 @@ class _MainState extends State<MainPage> with SingleTickerProviderStateMixin {
             child: Column(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed("设置a"),
+                  onTap: () => Navigator.of(context).pushNamed("设置"),
                   child: Container(
                     height: 100,
                     margin: EdgeInsets.only(left: 16),
